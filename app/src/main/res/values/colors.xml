@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="BaseBlue">#2280AF</color>
+    <color name="BaseBlueLight">#7BBBDC</color>
+    <color name="BaseBlueDark">#175676</color>
+    <color name="BaseBrick">#AF5122</color>
+    <color name="BaseBrickLight">#DB9B7A</color>
+    <color name="BaseBrickDark">#763717</color>
+    <color name="TextHint">#A6A6A6</color>
+
 </resources>

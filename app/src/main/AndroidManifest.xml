@@ -13,7 +13,11 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FinalProject.NoActionBar">
+            android:theme="@style/Theme.FinalProject.NoActionBar"
+            android:parentActivityName=".MainActivity"
+            >
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

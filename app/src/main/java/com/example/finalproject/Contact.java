@@ -21,11 +21,11 @@ public class Contact {
         mContactNumber = contactNumber;
     }
 
-    public String getmContactName(){
+    public String getContactName(){
         return mContactName;
     }
 
-    public Integer getmContactNumber(){
+    public Integer getContactNumber(){
         return mContactNumber;
     }
 

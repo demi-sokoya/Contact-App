@@ -33,7 +33,6 @@ public class ContactRepository {
         }
 
         @Override
-        //What does ... do in the background
         protected Void doInBackground(Contact... contacts) {
             mAsyncTaskDao.insert(contacts[0]);
             return null;

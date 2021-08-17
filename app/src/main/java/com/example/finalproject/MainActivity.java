@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +25,7 @@ import com.example.finalproject.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -64,6 +67,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, NEW_CONTACT_ACTIVITY_REQUEST_CODE);
             }
         });
+
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        Contact currentContact = adapter.getContactAtPosition(position);
+                        Toast.makeText(MainActivity.this, getString(R.string.Deleting) + currentContact.getContactName(),Toast.LENGTH_LONG).show();
+
+                        mContactViewModel.deleteContact(currentContact);
+                    }
+                });
+        helper.attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -94,8 +116,10 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == NEW_CONTACT_ACTIVITY_REQUEST_CODE
         && resultCode == RESULT_OK){
             String name = data.getStringExtra(AddContactActivity.NAME_REPLY);
-            Integer number = data.getIntExtra((AddContactActivity.NUMBER_REPLY), 0);
+            String number = data.getStringExtra((AddContactActivity.NUMBER_REPLY));
             Contact contact = new Contact(name, number);
+            mContactViewModel.insert(contact);
+
         }
     }
 }

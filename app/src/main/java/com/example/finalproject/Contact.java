@@ -7,28 +7,34 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "contact_table")
 public class Contact {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    private int mId;
+
+
     @NonNull
     @ColumnInfo(name = "contactName")
     private String mContactName;
 
     @NonNull
     @ColumnInfo(name = "contactNumber")
-    private Integer mContactNumber;
+    private String mContactNumber;
 
-    public Contact(@NonNull String contactName, @NonNull Integer contactNumber){
+    public Contact(@NonNull String contactName, @NonNull String contactNumber, int id){
 
         mContactName = contactName;
         mContactNumber = contactNumber;
+        mId = id;
     }
 
     public String getContactName(){
         return mContactName;
     }
 
-    public Integer getContactNumber(){
+    public String getContactNumber(){
         return mContactNumber;
     }
+
+    //public int getId(){return mId;}
 
 
 }

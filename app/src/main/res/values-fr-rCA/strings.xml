@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">Contacts</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="Deleting">Suppression…</string>
+    <string name="contact_name">"Nom du contact "</string>
+    <string name="phone_icon">Icône de téléphone</string>
+    <string name="phone_number">Numéro de téléphone</string>
+    <string name="email_icon">Icône de courrier électronique</string>
+    <string name="email">E-mail</string>
+    <string name="address">Adresse</string>
+    <string name="save_contact_button">Bouton Enregistrer le contact</string>
+    <string name="contact_icon">Icône de contact</string>
+    <string name="address_icon">Icône d\'adresse</string>
+    <string name="add_contact_button">Ajouter un bouton de contact</string>
 </resources>

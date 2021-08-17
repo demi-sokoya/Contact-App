@@ -30,7 +30,8 @@
                 app:srcCompat="@drawable/ic_baseline_person_24"
                 android:layout_gravity="bottom"
                 android:paddingBottom="10dp"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:contentDescription="@string/contact_icon" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
                     android:id="@+id/contactNameLabelTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Contact Name"
+                    android:text="@string/contact_name"
                     android:layout_gravity="start"
                     android:visibility="invisible"/>
 
@@ -51,8 +52,8 @@
                     android:id="@+id/editTextContactName"
                     style="@style/editTextStyle"
                     android:inputType="textPersonName"
-                    android:hint="Contact Name"
-                    />
+                    android:hint="@string/contact_name"
+                    android:importantForAutofill="no" />
 
 
             </LinearLayout>
@@ -74,7 +75,8 @@
                 app:srcCompat="@drawable/ic_baseline_phone_24"
                 android:layout_gravity="bottom"
                 android:paddingBottom="10dp"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:contentDescription="@string/phone_icon" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -87,7 +89,7 @@
                     android:id="@+id/phoneNumberLabelTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Phone Number"
+                    android:text="@string/phone_number"
                     android:layout_gravity="start"
                     android:visibility="invisible"/>
 
@@ -95,7 +97,8 @@
                     android:id="@+id/editTextPhoneNumber"
                     android:inputType="phone"
                     style="@style/editTextStyle"
-                    android:hint="Phone Number"/>
+                    android:hint="@string/phone_number"
+                    android:importantForAutofill="no" />
 
             </LinearLayout>
 
@@ -117,7 +120,8 @@
                 app:srcCompat="@drawable/ic_baseline_email_24"
                 android:layout_gravity="bottom"
                 android:paddingBottom="10dp"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:contentDescription="@string/email_icon" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -130,7 +134,7 @@
                     android:id="@+id/emailLabelTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email"
+                    android:text="@string/email"
                     android:layout_gravity="start"
                     android:visibility="invisible"/>
 
@@ -138,7 +142,8 @@
                     android:id="@+id/editTextContactEmail"
                     style="@style/editTextStyle"
                     android:inputType="textEmailAddress"
-                    android:hint="Email"/>
+                    android:hint="@string/email"
+                    android:importantForAutofill="no" />
 
 
             </LinearLayout>
@@ -160,7 +165,8 @@
                 app:srcCompat="@drawable/ic_baseline_location_on_24"
                 android:layout_gravity="bottom"
                 android:paddingBottom="10dp"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:contentDescription="@string/address_icon" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -173,7 +179,7 @@
                     android:id="@+id/addressLabelTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address"
+                    android:text="@string/address"
                     android:layout_gravity="start"
                     android:visibility="invisible"/>
 
@@ -181,7 +187,8 @@
                     android:id="@+id/editTextContactAddress"
                     style="@style/editTextStyle"
                     android:inputType="textPostalAddress"
-                    android:hint="Address"/>
+                    android:hint="@string/address"
+                    android:importantForAutofill="no" />
 
 
             </LinearLayout>
@@ -195,7 +202,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:contentDescription="Save Contact Button"
+        android:contentDescription="@string/save_contact_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:shapeAppearanceOverlay="@style/fab_3_rounded"

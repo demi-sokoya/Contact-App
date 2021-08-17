@@ -55,9 +55,15 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
                 contactNumber.setText(number);
                 contactEmail.setText(email);
                 contactAddress.setText(address);
+                //getSupportActionBar().setTitle("Edit Contact");
             }
 
         }
+/*
+        else {
+            getSupportActionBar().setTitle("Add Contact");
+        }
+*/
 
         contactNumber.addTextChangedListener(this);
         contactName.addTextChangedListener(this);

@@ -49,6 +49,7 @@
                 android:layout_weight="7">
 
                 <TextView
+                    android:id="@+id/contactNameLabelTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Contact Name"
@@ -80,7 +81,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_baseline_phone_24"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
+                android:paddingBottom="10dp"
                 android:layout_weight="2"/>
 
             <LinearLayout
@@ -91,7 +93,7 @@
                 android:layout_weight="7">
 
                 <TextView
-                    android:id="@+id/phone_number_TV"
+                    android:id="@+id/phoneNumberLabelTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Phone Number"
@@ -104,14 +106,23 @@
                     style="@style/editTextStyle"
                     android:hint="Phone Number"/>
 
-                <Spinner
-                    android:id="@+id/phoneSpinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"/>
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:contentDescription="Save Contact Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:shapeAppearanceOverlay="@style/fab_3_rounded"
+        app:srcCompat="@android:drawable/ic_menu_save"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

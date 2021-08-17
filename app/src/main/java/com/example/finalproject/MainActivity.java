@@ -1,13 +1,17 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,10 +24,14 @@ import com.example.finalproject.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private ContactViewModel mContactViewModel;
+    public static final int NEW_CONTACT_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +41,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+        mContactViewModel = ViewModelProviders.of(this).get(ContactViewModel.class);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ContactListAdapter adapter = new ContactListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        mContactViewModel.getAllContacts().observe(this, new Observer<List<Contact>>() {
+            @Override
+            public void onChanged(List<Contact> contacts) {
+                adapter.setContacts(contacts);
+            }
+        });
+
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, AddContactActivity.class);
+                startActivityForResult(intent, NEW_CONTACT_ACTIVITY_REQUEST_CODE);
             }
         });
     }
@@ -70,5 +88,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode == NEW_CONTACT_ACTIVITY_REQUEST_CODE
+        && resultCode == RESULT_OK){
+            String name = data.getStringExtra(AddContactActivity.NAME_REPLY);
+            Integer number = data.getIntExtra((AddContactActivity.NUMBER_REPLY), 0);
+            Contact contact = new Contact(name, number);
+        }
+    }
 }

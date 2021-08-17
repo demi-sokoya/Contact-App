@@ -12,6 +12,7 @@ public class Contact {
     @ColumnInfo(name = "contactName")
     private String mContactName;
 
+    @NonNull
     @ColumnInfo(name = "contactNumber")
     private Integer mContactNumber;
 

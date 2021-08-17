@@ -19,10 +19,22 @@ public class Contact {
     @ColumnInfo(name = "contactNumber")
     private String mContactNumber;
 
-    public Contact(@NonNull String contactName, @NonNull String contactNumber, int id){
+    @NonNull
+    @ColumnInfo(name = "contactEmail")
+    private String mContactEmail;
+
+    @NonNull
+    @ColumnInfo(name = "contactAddress")
+    private String mContactAddress;
+
+
+
+    public Contact( int id, @NonNull String contactName, @NonNull String contactNumber, String contactEmail, String contactAddress){
 
         mContactName = contactName;
         mContactNumber = contactNumber;
+        mContactEmail = contactEmail;
+        mContactAddress = contactAddress;
         mId = id;
     }
 
@@ -34,7 +46,11 @@ public class Contact {
         return mContactNumber;
     }
 
-    //public int getId(){return mId;}
+    public String getContactEmail() { return mContactEmail;}
+
+    public String getContactAddress() { return mContactAddress;}
+
+    public int getId(){return mId;}
 
 
 }

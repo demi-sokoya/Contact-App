@@ -53,9 +53,8 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public int getItemCount(){
         if(mContacts != null){
             return mContacts.size();
-        } else {
-            return 0;
-        }
+        } else return 0;
+
     }
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
@@ -80,6 +79,10 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public Contact getContactAtPosition (int position) {
 
         return mContacts.get(position);
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        ContactListAdapter.clickListener = clickListener;
     }
 
     public interface ClickListener {

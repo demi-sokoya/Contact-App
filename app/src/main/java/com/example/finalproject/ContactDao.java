@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -22,5 +23,8 @@ public interface ContactDao {
 
     @Query("SELECT * FROM contact_table ORDER BY contactName ASC")
     LiveData<List<Contact>> getAllContacts();
+
+    @Update
+    void update(Contact... contact);
 
 }

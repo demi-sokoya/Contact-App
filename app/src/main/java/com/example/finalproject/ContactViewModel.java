@@ -28,6 +28,10 @@ public class ContactViewModel extends AndroidViewModel {
     public void deleteContact(Contact contact) {
         mContactRepository.deleteContact(contact);
     }
+
+    public void update(Contact contact) {
+        mContactRepository.update(contact);
+    }
 }
 
 

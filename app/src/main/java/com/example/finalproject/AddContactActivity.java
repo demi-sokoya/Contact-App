@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static com.example.finalproject.MainActivity.EXTRA_DATA_ID;
+import static com.example.finalproject.MainActivity.EXTRA_DATA_COLOR;
 import static com.example.finalproject.MainActivity.UPDATE_CONTACT_NAME;
 import static com.example.finalproject.MainActivity.UPDATE_CONTACT_EMAIL;
 import static com.example.finalproject.MainActivity.UPDATE_CONTACT_NUMBER;
@@ -28,6 +29,8 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
     public static final String EMAIL_REPLY = "EMAIL.REPLY";
     public static final String ADDRESS_REPLY = "ADDRESS.REPLY";
     public static final String ID_REPLY = "ID.REPLY";
+    public static final String COLOR_REPLY = "COLOR.REPLY";
+
 
 
 
@@ -102,8 +105,10 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
 
                     if (extras != null && extras.containsKey(EXTRA_DATA_ID)){
                         int id = extras.getInt(EXTRA_DATA_ID, -1);
+                        int color = extras.getInt(EXTRA_DATA_COLOR, 0);
                         if(id != -1) {
                             replyIntent.putExtra(ID_REPLY, id);
+                            replyIntent.putExtra(COLOR_REPLY, color);
                         }
                     }
                     // Set the result to show success

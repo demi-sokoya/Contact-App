@@ -1,8 +1,12 @@
 package com.example.finalproject;
 
+import android.graphics.Color;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "contact_table")
@@ -26,15 +30,31 @@ public class Contact {
     @ColumnInfo(name = "contactAddress")
     private String mContactAddress;
 
+    @Ignore
+    @ColumnInfo(name = "contactColor")
+    private int mContactColor;
+
+
 
 
     public Contact( int id, @NonNull String contactName, @NonNull String contactNumber, String contactEmail, String contactAddress){
-
+        Log.wtf("Constructctor", " Constructor called");
         mContactName = contactName;
         mContactNumber = contactNumber;
         mContactEmail = contactEmail;
         mContactAddress = contactAddress;
         mId = id;
+        mContactColor = Color.argb(255, (int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
+    }
+
+    public Contact( int id, @NonNull String contactName, @NonNull String contactNumber, String contactEmail, String contactAddress, int color){
+        Log.wtf("Constructctor", " Constructor called");
+        mContactName = contactName;
+        mContactNumber = contactNumber;
+        mContactEmail = contactEmail;
+        mContactAddress = contactAddress;
+        mId = id;
+        mContactColor = color;
     }
 
     public String getContactName(){
@@ -50,6 +70,14 @@ public class Contact {
     public String getContactAddress() { return mContactAddress;}
 
     public int getId(){return mId;}
+
+    public int getContactColor () {
+        return mContactColor;
+    }
+
+    public void setmContactColor(int color){
+        mContactColor = color;
+    }
 
 
 }

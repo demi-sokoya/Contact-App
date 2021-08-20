@@ -15,5 +15,6 @@
     <color name="BaseBrickLight">#DB9B7A</color>
     <color name="BaseBrickDark">#763717</color>
     <color name="TextHint">#A6A6A6</color>
+    <color name="red">#FF0000</color>
 
 </resources>

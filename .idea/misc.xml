@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/first_letter_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/first_letter_background_dark.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_contact_page_24.xml" value="0.33240740740740743" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.33240740740740743" />
         <entry key="app/src/main/res/drawable/splah_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_contact.xml" value="0.375" />

@@ -1,6 +1,9 @@
 package com.example.finalproject;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String UPDATE_CONTACT_ADDRESS = "contact_address_to_be_updated";
 
     public static final String EXTRA_DATA_ID = "extra_data_id";
+    public static final String EXTRA_DATA_COLOR = "extra_data_color";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         setSupportActionBar(binding.toolbar);
         //set up the ContactViewModel
@@ -88,11 +94,53 @@ public class MainActivity extends AppCompatActivity {
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         int position = viewHolder.getAdapterPosition();
                         Contact currentContact = adapter.getContactAtPosition(position);
-                        Toast.makeText(MainActivity.this, getString(R.string.Deleting) + " " +currentContact.getContactName(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, getString(R.string.Deleting) + " " +currentContact.getContactName(),Toast.LENGTH_SHORT).show();
 
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setMessage("Do you want to Delete " + currentContact.getContactName() + " from your contact list");
+
+                        builder.setPositiveButton("YES \uD83D\uDDD1️", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mContactViewModel.deleteContact(currentContact);
+                            }
+                        });
+
+                        //builder.setPositiveButtonIcon(getDrawable(R.drawable.ic_baseline_delete_forever_24));
+
+
+
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, "Contact not deleted.", Toast.LENGTH_SHORT);
+                                adapter.notifyItemChanged(position);
+                            }
+
+                        });
+
+                        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                adapter.notifyItemChanged(position);
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+
+                        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface d) {
+                                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.BaseBrickDark));
+                                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(randomColor());
+                                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(getResources().getColor(R.color.BaseBrickLight));
+                            }
+                        });
+
+                        dialog.show();
 
                         //delete the contact
-                        mContactViewModel.deleteContact(currentContact);
+                       // mContactViewModel.deleteContact(currentContact);
                     }
                 });
         helper.attachToRecyclerView(recyclerView);
@@ -142,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
             Integer id = data.getIntExtra(EXTRA_DATA_ID, 0);
 
 
+
             Contact contact = new Contact(id, name, number, email, address);
             //save the data to the database
             mContactViewModel.insert(contact);
@@ -151,10 +200,11 @@ public class MainActivity extends AppCompatActivity {
             String number_data = data.getStringExtra(AddContactActivity.NUMBER_REPLY);
             String email_data = data.getStringExtra(AddContactActivity.EMAIL_REPLY);
             String address_data = data.getStringExtra(AddContactActivity.ADDRESS_REPLY);
+            int color_data = data.getIntExtra(AddContactActivity.COLOR_REPLY, randomColor()); //finish
             int id = data.getIntExtra(AddContactActivity.ID_REPLY, -1);
 
             if(id != -1) {
-                mContactViewModel.update(new Contact(id, name_data, number_data, email_data, address_data));
+                mContactViewModel.update(new Contact(id, name_data, number_data, email_data, address_data, color_data));
             } else {
                 Toast.makeText(this, "Unable to update",
                         Toast.LENGTH_LONG).show();
@@ -170,7 +220,12 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(UPDATE_CONTACT_NUMBER,contact.getContactNumber());
         intent.putExtra(UPDATE_CONTACT_ADDRESS,contact.getContactAddress());
         intent.putExtra(EXTRA_DATA_ID, contact.getId());
+        intent.putExtra(EXTRA_DATA_COLOR, contact.getContactColor());
         startActivityForResult(intent, UPDATE_CONTACT_ACTIVITY_REQUEST_CODE);
 
+    }
+
+    public int randomColor (){
+        return Color.argb(255, (int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
     }
 }

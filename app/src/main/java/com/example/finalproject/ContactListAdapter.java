@@ -1,12 +1,15 @@
 package com.example.finalproject;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -38,6 +41,11 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             holder.phoneNumberView.setText(current.getContactNumber());
             //Adds the first letter of the contacts name to the little circle
             holder.firstLetterView.setText(Character.toString(current.getContactName().charAt(0)).toUpperCase());
+            //Drawable unwraped = AppCompatResources.getDrawable(holder.contactNameView.getContext(), R.drawable.first_letter_background);
+            //Drawable wrapped = DrawableCompat.wrap(unwraped);
+            //DrawableCompat.setTint(wrapped, current.getContactColor());
+            holder.firstLetterView.getBackground().setTint(current.getContactColor());
+            //holder.firstLetterView.setBackgroundColor(current.getContactColor());
         }
         else {
             holder.contactNameView.setText("Default Name");

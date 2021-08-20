@@ -9,12 +9,15 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+//@Entity tells the database that we are declaring a new entity and it's attributes
 @Entity(tableName = "contact_table")
 public class Contact {
+    //Declare the primary key and set it to autoincrement.
     @PrimaryKey(autoGenerate = true)
     private int mId;
 
     @NonNull
+    //@ColumnInfo makes sure that the database knows this is a column and we also specify the name of said column
     @ColumnInfo(name = "contactName")
     private String mContactName;
 
@@ -31,6 +34,7 @@ public class Contact {
     private String mContactAddress;
 
     @ColumnInfo(name = "contactColor")
+    //The @Ignore in this case helps avoid any issues from the setter not existing.
     @Ignore
     private String mContactColor;
 
@@ -38,12 +42,14 @@ public class Contact {
 
 
     public Contact( int id, @NonNull String contactName, @NonNull String contactNumber, String contactEmail, String contactAddress){
+        //Constructor for the contact class
         Log.wtf("Constructctor", " Constructor called");
         mContactName = contactName;
         mContactNumber = contactNumber;
         mContactEmail = contactEmail;
         mContactAddress = contactAddress;
         mId = id;
+        //sets the color to be a random color for each contact
         mContactColor = Integer.toString(Color.argb(255, (int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256)));
     }
 
@@ -74,10 +80,6 @@ public class Contact {
     public String getContactColor () {
         return mContactColor;
     }
-
-//    public void setmContactColor(int color){
-//        mContactColor = color;
-//    }
 
     public void setmContactColor(String color){
         mContactColor = color;

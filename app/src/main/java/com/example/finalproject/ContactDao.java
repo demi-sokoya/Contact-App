@@ -12,6 +12,7 @@ import java.util.List;
 
 @Dao
 public interface ContactDao {
+    //Inserts into the database
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Contact contact);
 

@@ -41,11 +41,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             holder.phoneNumberView.setText(current.getContactNumber());
             //Adds the first letter of the contacts name to the little circle
             holder.firstLetterView.setText(Character.toString(current.getContactName().charAt(0)).toUpperCase());
-            //Drawable unwraped = AppCompatResources.getDrawable(holder.contactNameView.getContext(), R.drawable.first_letter_background);
-            //Drawable wrapped = DrawableCompat.wrap(unwraped);
-            //DrawableCompat.setTint(wrapped, current.getContactColor());
             holder.firstLetterView.getBackground().setTint(Integer.parseInt(current.getContactColor()));
-            //holder.firstLetterView.setBackgroundColor(current.getContactColor());
         }
         else {
             holder.contactNameView.setText("Default Name");
@@ -54,6 +50,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         }
     }
 
+    //updating the list of contacts
     void setContacts(List<Contact> contacts){
         mContacts = contacts;
         notifyDataSetChanged();

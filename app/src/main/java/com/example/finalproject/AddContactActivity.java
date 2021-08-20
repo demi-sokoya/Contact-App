@@ -24,6 +24,8 @@ import static com.example.finalproject.MainActivity.UPDATE_CONTACT_ADDRESS;
 
 
 public class AddContactActivity extends AppCompatActivity implements TextWatcher {
+
+    //here is where the String EXTRAS are declared
     public static final String NAME_REPLY = "NAME.REPLY";
     public static final String NUMBER_REPLY = "NUMBER.REPLY";
     public static final String EMAIL_REPLY = "EMAIL.REPLY";
@@ -39,8 +41,10 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Setting which layout is displayed and used
         setContentView(R.layout.activity_add_contact);
 
+        //Connecting UI elements
         EditText  contactName = findViewById(R.id.editTextContactName);
         EditText contactNumber = findViewById(R.id.editTextPhoneNumber);
         EditText contactEmail = findViewById(R.id.editTextContactEmail);
@@ -51,16 +55,19 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
         final Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
+            //Get the string extras for updating the contact regardless of content
             String name = extras.getString(UPDATE_CONTACT_NAME, "");
             String number = extras.getString(UPDATE_CONTACT_NUMBER, "");
             String email = extras.getString(UPDATE_CONTACT_EMAIL, "");
             String address = extras.getString(UPDATE_CONTACT_ADDRESS, "");
+
+            //Only setting the text if the values are not empty
             if(!name.isEmpty() || !number.isEmpty() || email.isEmpty() || address.isEmpty()) {
                 contactName.setText(name);
                 contactNumber.setText(number);
                 contactEmail.setText(email);
                 contactAddress.setText(address);
-                getSupportActionBar().setTitle("Edit Contact");
+                getSupportActionBar().setTitle("Edit Contact"); // Changes the Title for the action bar to "Edit Contact"
             }
 
         }
@@ -76,6 +83,7 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
         contactEmail.addTextChangedListener(this);
         contactAddress.addTextChangedListener(this);
 
+        //Connecting the Save Floating Action Button
         final FloatingActionButton saveBtn = findViewById(R.id.save);
 
 
@@ -118,6 +126,7 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
             }
         });
 
+        //This enables us to have a done button within the keyboard on the device which calls the onClick method of the save button.
         contactAddress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

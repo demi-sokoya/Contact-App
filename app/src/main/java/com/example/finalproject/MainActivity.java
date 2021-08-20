@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
             mContactViewModel.insert(contact);
 
         } else if (requestCode == UPDATE_CONTACT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            //gets what data has been passed throught when a contact is being updated and makes updates
             String name_data = data.getStringExtra(AddContactActivity.NAME_REPLY);
             String number_data = data.getStringExtra(AddContactActivity.NUMBER_REPLY);
             String email_data = data.getStringExtra(AddContactActivity.EMAIL_REPLY);

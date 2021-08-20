@@ -36,6 +36,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             Contact current = mContacts.get(position);
             holder.contactNameView.setText((current.getContactName()));
             holder.phoneNumberView.setText(current.getContactNumber());
+            //Adds the first letter of the contacts name to the little circle
             holder.firstLetterView.setText(Character.toString(current.getContactName().charAt(0)).toUpperCase());
         }
         else {

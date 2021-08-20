@@ -44,20 +44,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+        //set up the ContactViewModel
         mContactViewModel = ViewModelProviders.of(this).get(ContactViewModel.class);
 
+        //Set up the recycler view
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ContactListAdapter adapter = new ContactListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //Get all the contacts from the database and add them to the adapter
         mContactViewModel.getAllContacts().observe(this, new Observer<List<Contact>>() {
             @Override
             public void onChanged(List<Contact> contacts) {
+                //update the list of contacts
                 adapter.setContacts(contacts);
             }
         });
 
+        //Set up for the floating action button
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+        //Added the ability to swipe items to delete them from the list
         ItemTouchHelper helper = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0,
                         ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -80,8 +88,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         int position = viewHolder.getAdapterPosition();
                         Contact currentContact = adapter.getContactAtPosition(position);
-                        Toast.makeText(MainActivity.this, getString(R.string.Deleting) + currentContact.getContactName(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, getString(R.string.Deleting) + " " +currentContact.getContactName(),Toast.LENGTH_LONG).show();
 
+
+                        //delete the contact
                         mContactViewModel.deleteContact(currentContact);
                     }
                 });
@@ -133,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             Contact contact = new Contact(id, name, number, email, address);
+            //save the data to the database
             mContactViewModel.insert(contact);
 
         } else if (requestCode == UPDATE_CONTACT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {

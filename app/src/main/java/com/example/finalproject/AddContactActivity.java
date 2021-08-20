@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -55,38 +57,43 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
                 contactNumber.setText(number);
                 contactEmail.setText(email);
                 contactAddress.setText(address);
-                //getSupportActionBar().setTitle("Edit Contact");
+                getSupportActionBar().setTitle("Edit Contact");
             }
 
         }
-/*
+
         else {
             getSupportActionBar().setTitle("Add Contact");
         }
-*/
 
+
+        //Added TextChanged Listener for the text labels to become visible when editing starts
         contactNumber.addTextChangedListener(this);
         contactName.addTextChangedListener(this);
         contactEmail.addTextChangedListener(this);
         contactAddress.addTextChangedListener(this);
 
         final FloatingActionButton saveBtn = findViewById(R.id.save);
+
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+                //Create a new intent for the reply
                 Intent replyIntent = new Intent();
                 if(TextUtils.isEmpty(contactName.getText())){
+                    //If no contact name was entered then set the result to canceled
                     setResult(RESULT_CANCELED, replyIntent);
                 }
                 else {
-
+                    //Getting all the entered information
                     String name = contactName.getText().toString();
                     String number =contactNumber.getText().toString();
                     String email = contactEmail.getText().toString();
                     String address = contactAddress.getText().toString();
 
+                    //Putting the entered data in the extras for the reply intent
                     replyIntent.putExtra(NAME_REPLY, name);
                     replyIntent.putExtra(NUMBER_REPLY, number);
                     replyIntent.putExtra(EMAIL_REPLY, email);
@@ -99,10 +106,21 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
                             replyIntent.putExtra(ID_REPLY, id);
                         }
                     }
-
+                    // Set the result to show success
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();
+            }
+        });
+
+        contactAddress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE){
+                    saveBtn.callOnClick();
+                    return true;
+                }
+                return false;
             }
         });
     }
@@ -114,6 +132,7 @@ public class AddContactActivity extends AppCompatActivity implements TextWatcher
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+        //OnTextChanged method to set the visibility of the labelTVs
         EditText contactName = findViewById(R.id.editTextContactName);
         if(contactName.getText().toString().isEmpty()){
             findViewById(R.id.contactNameLabelTV).setVisibility(View.INVISIBLE);

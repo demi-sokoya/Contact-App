@@ -10,7 +10,6 @@ public class Contact {
     @PrimaryKey(autoGenerate = true)
     private int mId;
 
-
     @NonNull
     @ColumnInfo(name = "contactName")
     private String mContactName;

@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
             String number_data = data.getStringExtra(AddContactActivity.NUMBER_REPLY);
             String email_data = data.getStringExtra(AddContactActivity.EMAIL_REPLY);
             String address_data = data.getStringExtra(AddContactActivity.ADDRESS_REPLY);
-            int color_data = data.getIntExtra(AddContactActivity.COLOR_REPLY, randomColor()); //finish
+            String color_data = data.getStringExtra(AddContactActivity.COLOR_REPLY); //finish
             int id = data.getIntExtra(AddContactActivity.ID_REPLY, -1);
 
             if(id != -1) {

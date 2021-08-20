@@ -44,7 +44,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             //Drawable unwraped = AppCompatResources.getDrawable(holder.contactNameView.getContext(), R.drawable.first_letter_background);
             //Drawable wrapped = DrawableCompat.wrap(unwraped);
             //DrawableCompat.setTint(wrapped, current.getContactColor());
-            holder.firstLetterView.getBackground().setTint(current.getContactColor());
+            holder.firstLetterView.getBackground().setTint(Integer.parseInt(current.getContactColor()));
             //holder.firstLetterView.setBackgroundColor(current.getContactColor());
         }
         else {

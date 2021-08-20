@@ -30,9 +30,9 @@ public class Contact {
     @ColumnInfo(name = "contactAddress")
     private String mContactAddress;
 
-    @Ignore
     @ColumnInfo(name = "contactColor")
-    private int mContactColor;
+    @Ignore
+    private String mContactColor;
 
 
 
@@ -44,10 +44,10 @@ public class Contact {
         mContactEmail = contactEmail;
         mContactAddress = contactAddress;
         mId = id;
-        mContactColor = Color.argb(255, (int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
+        mContactColor = Integer.toString(Color.argb(255, (int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256)));
     }
 
-    public Contact( int id, @NonNull String contactName, @NonNull String contactNumber, String contactEmail, String contactAddress, int color){
+    public Contact( int id, @NonNull String contactName, @NonNull String contactNumber, String contactEmail, String contactAddress, String color){
         Log.wtf("Constructctor", " Constructor called");
         mContactName = contactName;
         mContactNumber = contactNumber;
@@ -71,13 +71,16 @@ public class Contact {
 
     public int getId(){return mId;}
 
-    public int getContactColor () {
+    public String getContactColor () {
         return mContactColor;
     }
 
-    public void setmContactColor(int color){
+//    public void setmContactColor(int color){
+//        mContactColor = color;
+//    }
+
+    public void setmContactColor(String color){
         mContactColor = color;
     }
-
 
 }
